@@ -1,0 +1,88 @@
+﻿@model EmpoloyeeCreateViewModel
+@{
+    ViewBag.Title = "Create Employee";
+    
+   
+}
+
+    <form enctype="multipart/form-data" class="mt-3" asp-controller="Home" asp-action="Create" method="post">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" asp-for="Name"></label>
+            <div class="col-sm-10">
+                <input asp-for="Name" class="form-control" placeholder="Name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" asp-for="Email"></label>
+            <div class="col-sm-10">
+                <input asp-for="Email" class="form-control" placeholder="Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" asp-for="Department"></label>
+            <div class="col-sm-10">
+                <select class="custom-select mr-sm-2" asp-for="Department" asp-items="Html.GetEnumSelectList<Dept>()">
+                    <option value="">Select A Value</option>
+
+                </select>
+                <span asp-validation-for="Department" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" asp-for="Photo"></label>
+            <div class="col-sm-10">
+                <div class="custom-file">
+                    <input multiple asp-for="Photo" class="form-control  custom-file-input" />
+                    <label class="custom-file-label">Choose File .........</label>
+                </div>
+            </div>
+        </div>
+
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+
+        @section  scripts{
+                <script>
+                    //Code for  Handling Multiple files
+                    //$(document).ready(function () {
+                    //    $('.custom-file-input').on("change", function () {
+                    //        var fileName = $(this).next('.custom-file-label');
+                    //        var files = $(this)[0].files;
+                    //        if (files.length > 1) {
+                    //            fileLabel.html(files.length + ' files selected');
+                    //        } else if (files.length == 1) {
+                    //            fileLabel.html(files[0].name);
+                    //        }
+                    //    });
+
+                    //});
+
+                        $(document).ready(function () {
+                            $('.custom-file-input').on("change", function () {
+                                // var fileName = $(this).val().split("\\").pop();
+                                // $(this).next('.custom-file-label').html(fileName);
+                                var fileLabel = $(this).next('.custom-file-label');
+                                var files = $(this)[0].files;
+                                if (files.length > 1) {
+                                    fileLabel.html(files.length + 'files selected');
+                                } else if (files.length == 1) {
+                                    fileLabel.html(files[0].name);
+                                }
+                            });
+                    });
+                
+            </script>
+
+        }
+
+    </form>
